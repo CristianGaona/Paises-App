@@ -30,6 +30,14 @@ export class PaisService {
     return this.http.get<Country>(urlPaisInd);
   }
 
+  // Obtener lista de paises por region
+  //https://restcountries.eu/rest/v2/region/{region}
+  buscarRegion( region:string): Observable<Country[]>{
+    const urlRegiones = `${this.apiURL}/region/${region}`;
+    return this.http.get<Country[]>(urlRegiones);
+
+  }
+
 
 
 }
