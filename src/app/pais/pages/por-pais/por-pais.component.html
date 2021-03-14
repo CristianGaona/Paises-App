@@ -6,10 +6,21 @@
     <div class="col">
         <!--Emite el termino recuperado, y lo envia al método buscar del componente por-pais-component-->
        <app-pais-input (onEnter)="buscar( $event )"
-                    (onDebounce)="sugerencias( $event )" placeholder="Buscar pais.."></app-pais-input>
+                    (onDebounce)="sugerencias( $event )" placeholder="Buscar pais..."></app-pais-input>
     </div>
 </div>
+<ul *ngIf="mostrarSugerencias" class="list-group">
+    <li class="list-group-item list-group-item-action" *ngFor="let paisSugerido of paisesSugeridos">
+        <a class="nav-link"
+           [routerLink]="['/pais', paisSugerido.alpha2Code]">{{paisSugerido.name}}</a>
+    </li>
 
+    <li class="list-group-item list-group-item-action" (click)="buscarSugerido(termino)">
+        <a class="nav-link"> Buscar "{{termino}}"</a>
+           
+    </li>
+
+</ul>
 <hr>
 <div class="alert alert-danger" *ngIf="hayError">
     No se encontró nada con el término {{termino}}
